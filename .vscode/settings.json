@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "beautify.ignore": "",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.format.semicolons": "remove",
+  "prettier.semi": false
+}
