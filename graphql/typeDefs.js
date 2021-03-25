@@ -20,11 +20,20 @@ module.exports = gql`
   }
 
   type Message {
-    id: ID!
+    edge: {
+        cursor: String
+        node: {
+            id: ID!
     from: String!
     to: ID!
     createdAt: String!
     body: String!
+        }
+    }
+    pageInfo: {
+        endCursor: Boolean!
+        hasNextPage: Boolean!
+    }
   }
 
   type Subscription {
