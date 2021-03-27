@@ -20,20 +20,12 @@ module.exports = gql`
   }
 
   type Message {
-    edge: {
-        cursor: String
-        node: {
-            id: ID!
+    cursor: String
+    id: ID!
     from: String!
     to: ID!
     createdAt: String!
     body: String!
-        }
-    }
-    pageInfo: {
-        endCursor: Boolean!
-        hasNextPage: Boolean!
-    }
   }
 
   type Subscription {
@@ -44,7 +36,7 @@ module.exports = gql`
     "return all of user but not user login"
     getUsers: [User]!
     "get all messages of user and destination"
-    getMessages(userId: ID!, to: ID!): [Message]!
+    getMessages(userId: ID!, to: ID!, offset: Int): [Message]!
     "get all otheruser that user already send message"
     getUsersMessage(userId: ID!): [User]!
   }

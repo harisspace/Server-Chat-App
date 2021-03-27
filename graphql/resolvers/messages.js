@@ -10,17 +10,20 @@ const User = require("../../models/User")
 
 module.exports = {
   Query: {
-    getMessages: async (_, { userId, to }, context) => {
+    getMessages: async (parent, { userId, to, offset }, context) => {
       const { decodedToken } = checkAuth(context)
 
       if (decodedToken && decodedToken.id === userId) {
         try {
-          const messages = await Message.find({
+          let messages = await Message.find({
             $and: [
               { $or: [{ from: userId }, { from: to }] },
               { $or: [{ to: userId }, { to: to }] },
             ],
-          }).sort({ createdAt: 1 })
+          })
+            .limit(35)
+            .skip(offset)
+            .sort({ createdAt: -1 })
           return messages
         } catch (err) {
           throw new ApolloError(err)

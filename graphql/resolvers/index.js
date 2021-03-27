@@ -1,18 +1,26 @@
-const usersResolvers = require('./users')
-const messagesResolvers = require('./messages')
+const usersResolvers = require("./users")
+const messagesResolvers = require("./messages")
 
 module.exports = {
-    Query: {
-        ...usersResolvers.Query,
-        ...messagesResolvers.Query
+  Message: {
+    cursor: (parent, { cursor }) => {
+      if (!cursor) {
+        console.log(parent.messages)
+      }
     },
+  },
 
-    Mutation: {
-        ...usersResolvers.Mutation,
-        ...messagesResolvers.Mutation
-    },
+  Query: {
+    ...usersResolvers.Query,
+    ...messagesResolvers.Query,
+  },
 
-    Subscription: {
-        ...messagesResolvers.Subscription
-    }
+  Mutation: {
+    ...usersResolvers.Mutation,
+    ...messagesResolvers.Mutation,
+  },
+
+  Subscription: {
+    ...messagesResolvers.Subscription,
+  },
 }
